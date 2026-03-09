@@ -1,0 +1,31 @@
+{
+  "ninjagaiden4:Strike": {
+    "NAME": "打击",
+    "DESCRIPTION": "造成 !D! 点伤害。",
+    "UPGRADE_DESCRIPTION": " 固有 。 NL 造成 !D! 点伤害。"
+  },
+  "ninjagaiden4:Izuna_Drop": {
+    "NAME": "饭纲落之术",
+    "DESCRIPTION": "造成 !D! 点伤害。",
+    "UPGRADE_DESCRIPTION": " 固有 。 NL 造成 !D! 点伤害。"
+  },
+  "ninjagaiden4:UT": {
+    "NAME": "UT",
+    "DESCRIPTION": "造成 !D! 点伤害。",
+    "UPGRADE_DESCRIPTION": " 固有 。 NL 造成 !D! 点伤害。"
+  },
+  "ninjagaiden4:Rising_Stance_Spin": {
+    "NAME": "鬼翔刃·轰式",
+    "DESCRIPTION": "对所有敌人造成 !D! 点伤害。",
+    "UPGRADE_DESCRIPTION": " 固有 。 NL 造成 !D! 点伤害。"
+  },
+  "ninjagaiden4:Ultimate_Defense": {
+    "NAME": "守护之极意",
+    "DESCRIPTION": "获得 !B! 点护甲。"
+  },
+  "ninjagaiden4:Just_Block": {
+    "NAME": "精准格挡",
+    "DESCRIPTION": "获得 !B! 点 护甲 。 获得 1 层 无实体 。",
+    "UPGRADE_DESCRIPTION": "获得 !B! 点 护甲 。 获得 1 层 无实体 。 抽 1 张牌。"
+  }
+}
