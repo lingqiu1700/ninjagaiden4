@@ -49,16 +49,6 @@ public class Strike extends CustomCard implements ModHelper {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToBottom(
-                new DamageAction(
-                        m,
-                        new DamageInfo(
-                                p,
-                                damage,
-                                DamageInfo.DamageType.NORMAL
-                        )
-                )
-        );
         addToBot(new core(m,new DamageInfo(p,this.damage,DamageInfo.DamageType.NORMAL),this));
     }
 

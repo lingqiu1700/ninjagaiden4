@@ -1,6 +1,5 @@
 package ninjagaiden4.modcore;
 
-import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -16,11 +15,14 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.Keyword;
-import com.megacrit.cardcrawl.relics.AbstractRelic;
 import ninjagaiden4.characters.yakumo;
 import ninjagaiden4.modcards.*;
+import ninjagaiden4.modcards.Takeminakata.Rising_Stance_Spin;
+import ninjagaiden4.modcards.Takeminakata.Kurama_Splitter;
+import ninjagaiden4.modcards.Weapon_Switch.Switch_Weapon;
 import ninjagaiden4.modcards.skill.Just_Block;
-import ninjagaiden4.relics.Takeminakata;
+import ninjagaiden4.relics.Yatousen;
+import ninjagaiden4.relics.hitogoroshi;
 
 import java.nio.charset.StandardCharsets;
 
@@ -70,13 +72,16 @@ public class Ninja4 implements EditCardsSubscriber, EditStringsSubscriber, EditC
         //  这里写添加你卡牌的代码
         BaseMod.addCard(new Strike());
         BaseMod.addCard(new Izuna_Drop());
-        BaseMod.addCard(new UT());
+        BaseMod.addCard(new Bloodbath_Slaughter());
         BaseMod.addCard(new Rising_Stance_Spin());
-        BaseMod.addCard(new Winged_Blade());
+        BaseMod.addCard(new Kurama_Splitter());
         BaseMod.addCard(new Flying_Swallow());
         BaseMod.addCard(new hayabusa_Flying_Swallow());
         BaseMod.addCard(new Ultimate_Defense());
         BaseMod.addCard(new Just_Block());
+        BaseMod.addCard(new UT());
+        BaseMod.addCard(new OT());
+        BaseMod.addCard(new Switch_Weapon());
     }
 
     @Override
@@ -104,7 +109,11 @@ public class Ninja4 implements EditCardsSubscriber, EditStringsSubscriber, EditC
     @Override
     public void receiveEditRelics() {
         BaseMod.addRelicToCustomPool(
-                new Takeminakata(),
+                new Yatousen(),
+                yakumo.PlayerColorEnum.YAKUMO_CARD_COLOR
+        );
+        BaseMod.addRelicToCustomPool(
+                new hitogoroshi(),
                 yakumo.PlayerColorEnum.YAKUMO_CARD_COLOR
         );
     }

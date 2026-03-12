@@ -6,5 +6,6 @@ public interface ModHelper {
     static String makeID(String id) {
         return MOD_ID + ":" + id;
     }
+
 }
 

@@ -38,5 +38,6 @@ public class core extends AbstractGameAction {
                 );
             }
         }
+        this.isDone = true;
     }
 }

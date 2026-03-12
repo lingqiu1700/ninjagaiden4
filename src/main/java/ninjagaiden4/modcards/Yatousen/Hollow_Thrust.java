@@ -1,4 +1,4 @@
-package ninjagaiden4.modcards;
+package ninjagaiden4.modcards.Yatousen;
 
 import basemod.abstracts.CustomCard;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -15,32 +15,32 @@ import static ninjagaiden4.characters.yakumo.PlayerColorEnum.YAKUMO_CARD_COLOR;
 import static ninjagaiden4.modcore.Ninja4.CardFields.dismemberRate;
 
 
-public class Rising_Stance_Spin extends CustomCard implements ModHelper {
-    public static final String ID = "ninjagaiden4:Rising_Stance_Spin";
+public class Hollow_Thrust extends CustomCard implements ModHelper {
+    public static final String ID = "ninjagaiden4:Hollow_Thrust";
     private static final CardStrings CARD_STRINGS = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = CARD_STRINGS.NAME;
-    private static final String IMG_PATH = "lingqiu1700/ninjagaiden4/images/cards/attack/Rising_Stance_Spin.png";
+    private static final String IMG_PATH = "lingqiu1700/ninjagaiden4/images/cards/attack/Hollow_Thrust.png";
     private static final int COST = 2;
     private static final String DESCRIPTION = CARD_STRINGS.DESCRIPTION;
     private static final CardType TYPE = CardType.ATTACK;
     private static final CardColor COLOR = YAKUMO_CARD_COLOR;
-    private static final CardRarity RARITY = CardRarity.UNCOMMON;
-    private static final CardTarget TARGET = CardTarget.ALL_ENEMY;
+    private static final CardRarity RARITY = CardRarity.COMMON;
+    private static final CardTarget TARGET = CardTarget.ENEMY;
 
-    public Rising_Stance_Spin() {
+    public Hollow_Thrust() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        this.damage = this.baseDamage = 16;
+        this.damage = this.baseDamage = 12;
         this.tags.add(CardTags.STRIKE);
         this.tags.add(CardTags.STARTER_STRIKE);
         this.tags.add(ninjagaiden4.modcore.Ninja4.CURSED_BLADES);
-        dismemberRate.set(this,0.25F);
+        dismemberRate.set(this,0.2F);
     }
 
     @Override
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeDamage(8);
+            this.upgradeDamage(6);
 
             this.rawDescription = CARD_STRINGS.UPGRADE_DESCRIPTION;
             this.initializeDescription();
@@ -49,17 +49,7 @@ public class Rising_Stance_Spin extends CustomCard implements ModHelper {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        for (AbstractMonster monster : AbstractDungeon.getMonsters().monsters) {
-            if (!monster.isDeadOrEscaped()) {
-                AbstractDungeon.actionManager.addToBottom(
-                        new DamageAction(
-                                monster,
-                                new DamageInfo(p, damage, DamageInfo.DamageType.NORMAL)
-                        )
-                );
-                // 把动作放在循环里，针对每个活着的怪物触发
-                addToBot(new core(monster, new DamageInfo(p, damage, DamageInfo.DamageType.NORMAL), this));
-            }
-        }
+        addToBot(new core(m,new DamageInfo(p, this.damage,DamageInfo.DamageType.NORMAL),this));
     }
+
 }

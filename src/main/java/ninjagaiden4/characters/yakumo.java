@@ -16,11 +16,12 @@ import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
-import com.megacrit.cardcrawl.relics.Vajra;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import ninjagaiden4.modcards.Strike;
+import ninjagaiden4.modcards.Ultimate_Defense;
 import ninjagaiden4.modcore.Ninja4;
-import ninjagaiden4.relics.Takeminakata;
+import ninjagaiden4.relics.Yatousen;
+import ninjagaiden4.relics.hitogoroshi;
 
 import java.util.ArrayList;
 
@@ -88,15 +89,22 @@ public class yakumo extends CustomPlayer {
         for(int x = 0; x<5; x++) {
             retVal.add(Strike.ID);
         }
+        for(int x = 0; x<3; x++) {
+            retVal.add(Ultimate_Defense.ID);
+        }
         retVal.add("ninjagaiden4:Strike");
         retVal.add("ninjagaiden4:Izuna_Drop");
+        retVal.add("ninjagaiden4:UT");
+        retVal.add("ninjagaiden4:OT");
+        retVal.add("ninjagaiden4:Switch_Weapon");
         return retVal;
     }
 
     // 初始遗物的ID
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
-        retVal.add(Takeminakata.ID);
+        retVal.add(Yatousen.ID);
+        retVal.add(hitogoroshi.ID);
         return retVal;
     }
 
