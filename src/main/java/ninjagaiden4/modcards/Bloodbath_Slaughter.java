@@ -32,8 +32,6 @@ public class Bloodbath_Slaughter extends CustomCard implements ModHelper {
     public Bloodbath_Slaughter() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         this.damage = this.baseDamage = 200;
-        this.tags.add(CardTags.STRIKE);
-        this.tags.add(CardTags.STARTER_STRIKE);
         this.tags.add(ninjagaiden4.modcore.Ninja4.CURSED_BLADES);
         Ninja4.CardFields.dismemberRate.set(this,1.0F);
     }

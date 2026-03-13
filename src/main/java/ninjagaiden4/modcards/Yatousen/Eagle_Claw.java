@@ -32,8 +32,6 @@ public class Eagle_Claw extends CustomCard implements ModHelper {
         this.damage = this.baseDamage = 6;
         this.baseMagicNumber = 4;
         this.magicNumber = this.baseMagicNumber;
-        this.tags.add(CardTags.STRIKE);
-        this.tags.add(CardTags.STARTER_STRIKE);
         this.tags.add(ninjagaiden4.modcore.Ninja4.CURSED_BLADES);
         dismemberRate.set(this,0.2F);
     }

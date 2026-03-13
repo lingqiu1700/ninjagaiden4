@@ -28,8 +28,6 @@ public class Izuna_Drop extends CustomCard implements ModHelper {
     public Izuna_Drop() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         this.damage = this.baseDamage = 24;
-        this.tags.add(CardTags.STRIKE);
-        this.tags.add(CardTags.STARTER_STRIKE);
         this.tags.add(CURSED_BLADES);
     }
 

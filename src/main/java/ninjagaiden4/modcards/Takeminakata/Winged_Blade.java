@@ -28,8 +28,6 @@ public class Winged_Blade extends CustomCard implements ModHelper {
     public Winged_Blade() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         this.damage = this.baseDamage = 12;
-        this.tags.add(CardTags.STRIKE);
-        this.tags.add(CardTags.STARTER_STRIKE);
         this.tags.add(ninjagaiden4.modcore.Ninja4.CURSED_BLADES);
         dismemberRate.set(this,0.2F);
     }

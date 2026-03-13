@@ -5,8 +5,8 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import ninjagaiden4.modcards.Takeminakata.Rising_Stance_Spin;
-import ninjagaiden4.modcards.Takeminakata.Kurama_Splitter;
+import ninjagaiden4.modcards.Takeminakata.Spiral_Shadow;
+import ninjagaiden4.modcards.Takeminakata.Blood.Takumo_Drop;
 import ninjagaiden4.modcards.Yatousen.Eagle_Claw;
 import ninjagaiden4.modcards.Yatousen.Hollow_Thrust;
 import ninjagaiden4.relics.*;
@@ -74,14 +74,14 @@ public class SwapWeaponAction extends AbstractGameAction {
         // 如果切成 Yatousen（夜叉王）
         if (newWeaponId.equals("ninjagaiden4:Yatousen")) {
             // Takeminakata的卡 -> 变成 Yatousen的卡
-            if (oldCard.cardID.equals(Rising_Stance_Spin.ID)) return new Eagle_Claw(); // 替换为你实际的卡
-            if (oldCard.cardID.equals(Kurama_Splitter.ID)) return new Hollow_Thrust();  // 替换为你实际的卡
+            if (oldCard.cardID.equals(Spiral_Shadow.ID)) return new Eagle_Claw(); // 替换为你实际的卡
+            if (oldCard.cardID.equals(Takumo_Drop.ID)) return new Hollow_Thrust();  // 替换为你实际的卡
         }
         // 如果切成 Takeminakata（建御名方）
         else if (newWeaponId.equals(Yatousen.ID)) {
             // Yatousen的卡 -> 变成 Takeminakata的卡
-            if (oldCard.cardID.equals("ninjagaiden4:Yatousen_Attack_1")) return new Rising_Stance_Spin();
-            if (oldCard.cardID.equals("ninjagaiden4:Yatousen_Attack_2")) return new Kurama_Splitter();
+            if (oldCard.cardID.equals("ninjagaiden4:Yatousen_Attack_1")) return new Spiral_Shadow();
+            if (oldCard.cardID.equals("ninjagaiden4:Yatousen_Attack_2")) return new Takumo_Drop();
         }
 
         return null; // 如果不是武器专属卡（比如基础打击、防御），就不替换

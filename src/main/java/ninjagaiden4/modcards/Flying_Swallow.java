@@ -31,8 +31,6 @@ public class Flying_Swallow extends CustomCard implements ModHelper {
     public Flying_Swallow() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
         this.damage = this.baseDamage = 8;
-        this.tags.add(CardTags.STRIKE);
-        this.tags.add(CardTags.STARTER_STRIKE);
         this.tags.add(ninjagaiden4.modcore.Ninja4.CURSED_BLADES);
         Ninja4.CardFields.dismemberRate.set(this,0.1F);
     }
