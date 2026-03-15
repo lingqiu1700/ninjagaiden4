@@ -38,6 +38,7 @@ public class Propulsion_Sweep extends AbstractNinjaAttackCard {
                     true, // 只找活着的
                     AbstractDungeon.cardRandomRng
             );
+
             AttackHelper.coreAction(p, randomMonster, this);
         });
     }
