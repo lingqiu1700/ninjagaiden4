@@ -54,8 +54,12 @@ public class Spiral_Shadow extends CustomCard implements ModHelper {
 
         AttackHelper.AoeAction(p,this,(monster,info) -> new core(monster, info, this));
 
-        if (Math.random() < 0.2) {
-            addToBot(new StunMonsterAction(m, p));
+        for (AbstractMonster monster : AbstractDungeon.getMonsters().monsters) {
+            if (!monster.isDeadOrEscaped()) {
+                if (Math.random() < 0.2) {
+                    addToBot(new StunMonsterAction(m, p));
+                }
+            }
         }
     }
 }

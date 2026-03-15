@@ -26,7 +26,7 @@ public class Serpent_Cleave extends CustomCard implements ModHelper {
     private static final String DESCRIPTION = CARD_STRINGS.DESCRIPTION;
     private static final CardType TYPE = CardType.ATTACK;
     private static final CardColor COLOR = YAKUMO_CARD_COLOR;
-    private static final CardRarity RARITY = CardRarity.BASIC;
+    private static final CardRarity RARITY = CardRarity.UNCOMMON;
     private static final CardTarget TARGET = CardTarget.ENEMY;
 
     public Serpent_Cleave() {

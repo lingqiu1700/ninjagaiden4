@@ -7,7 +7,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import ninjagaiden4.modcards.Takeminakata.Spiral_Shadow;
 import ninjagaiden4.modcards.Takeminakata.Blood.Takumo_Drop;
-import ninjagaiden4.modcards.Yatousen.Eagle_Claw;
+import ninjagaiden4.modcards.Yatousen.Blood.Eagle_Claw;
 import ninjagaiden4.modcards.Yatousen.Hollow_Thrust;
 import ninjagaiden4.relics.*;
 

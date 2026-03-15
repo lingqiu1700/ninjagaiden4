@@ -1,13 +1,13 @@
-package ninjagaiden4.modcards.Yatousen;
+package ninjagaiden4.modcards.Yatousen.Blood;
 
 import basemod.abstracts.CustomCard;
-import com.megacrit.cardcrawl.actions.common.DamageAction;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.FlightPower;
 import ninjagaiden4.actions.core;
 import ninjagaiden4.helpers.ModHelper;
 
@@ -29,8 +29,8 @@ public class Eagle_Claw extends CustomCard implements ModHelper {
 
     public Eagle_Claw() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        this.damage = this.baseDamage = 6;
-        this.baseMagicNumber = 4;
+        this.damage = this.baseDamage = 2;
+        this.baseMagicNumber = 14;
         this.magicNumber = this.baseMagicNumber;
         this.tags.add(ninjagaiden4.modcore.Ninja4.CURSED_BLADES);
         dismemberRate.set(this,0.2F);
@@ -52,6 +52,8 @@ public class Eagle_Claw extends CustomCard implements ModHelper {
         for (int i = 1; i < this.magicNumber; i++) {
             addToBot(new core(m, new DamageInfo(p, this.damage, DamageInfo.DamageType.NORMAL), this));
         }
+        addToBot(new DrawCardAction(2));
+        ModHelper.PAP(new FlightPower(p,1));
     }
 
 }

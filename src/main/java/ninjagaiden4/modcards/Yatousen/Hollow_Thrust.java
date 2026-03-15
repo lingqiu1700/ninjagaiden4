@@ -20,7 +20,7 @@ public class Hollow_Thrust extends CustomCard implements ModHelper {
     private static final CardStrings CARD_STRINGS = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = CARD_STRINGS.NAME;
     private static final String IMG_PATH = "lingqiu1700/ninjagaiden4/images/cards/attack/Hollow_Thrust.png";
-    private static final int COST = 2;
+    private static final int COST = 1;
     private static final String DESCRIPTION = CARD_STRINGS.DESCRIPTION;
     private static final CardType TYPE = CardType.ATTACK;
     private static final CardColor COLOR = YAKUMO_CARD_COLOR;
@@ -29,7 +29,8 @@ public class Hollow_Thrust extends CustomCard implements ModHelper {
 
     public Hollow_Thrust() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, TYPE, COLOR, RARITY, TARGET);
-        this.damage = this.baseDamage = 12;
+        this.damage = this.baseDamage = 6;
+        this.magicNumber = this.baseMagicNumber = 2;
         this.tags.add(ninjagaiden4.modcore.Ninja4.CURSED_BLADES);
         dismemberRate.set(this,0.2F);
     }
@@ -38,7 +39,7 @@ public class Hollow_Thrust extends CustomCard implements ModHelper {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeDamage(6);
+            this.upgradeDamage(3);
 
             this.rawDescription = CARD_STRINGS.UPGRADE_DESCRIPTION;
             this.initializeDescription();
@@ -47,7 +48,7 @@ public class Hollow_Thrust extends CustomCard implements ModHelper {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new core(m,new DamageInfo(p, this.damage,DamageInfo.DamageType.NORMAL),this));
+        ModHelper.Loop(0,magicNumber,i -> addToBot(new core(m,new DamageInfo(p, this.damage,DamageInfo.DamageType.NORMAL),this)));
     }
 
 }

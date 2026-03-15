@@ -6,6 +6,7 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import ninjagaiden4.actions.core;
 
 import java.util.function.BiFunction;
 
@@ -22,6 +23,14 @@ public class AttackHelper {
                 }
                 i++;
             }
+        }
+    }
+
+    public static void coreAction(AbstractPlayer p, AbstractMonster m, AbstractCard card) {
+        if (m != null && !m.isDeadOrEscaped()) {
+            DamageInfo info = new DamageInfo(p, card.damage, DamageInfo.DamageType.NORMAL);
+
+            AbstractDungeon.actionManager.addToBottom(new core(m, info, card));
         }
     }
 }

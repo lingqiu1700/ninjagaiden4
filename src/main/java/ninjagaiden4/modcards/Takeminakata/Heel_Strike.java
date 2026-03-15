@@ -23,7 +23,7 @@ public class Heel_Strike extends CustomCard implements ModHelper {
     private static final String DESCRIPTION = CARD_STRINGS.DESCRIPTION;
     private static final CardType TYPE = CardType.ATTACK;
     private static final CardColor COLOR = YAKUMO_CARD_COLOR;
-    private static final CardRarity RARITY = CardRarity.BASIC;
+    private static final CardRarity RARITY = CardRarity.COMMON;
     private static final CardTarget TARGET = CardTarget.ENEMY;
 
     public Heel_Strike() {
@@ -50,7 +50,7 @@ public class Heel_Strike extends CustomCard implements ModHelper {
     public void use(AbstractPlayer p, AbstractMonster m) {
         for (int i = 1; i < this.magicNumber; i++) {
             addToBot(new core(m, new DamageInfo(p, this.damage, DamageInfo.DamageType.NORMAL), this));
-            ModHelper.PAP(new DexterityPower(p, 2));
         }
+        ModHelper.PAP(new DexterityPower(p, 2));
     }
 }
