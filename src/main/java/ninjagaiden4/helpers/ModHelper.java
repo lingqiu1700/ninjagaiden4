@@ -1,6 +1,8 @@
 package ninjagaiden4.helpers;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
@@ -28,6 +30,16 @@ public interface ModHelper {
         for (int i = start; i < end; i++) {
             body.accept(i);
         }
+    }
+
+    static void MakeCardAction(AbstractCard c, int amount) {
+        AbstractDungeon.actionManager.addToBottom(new MakeTempCardInDrawPileAction(
+                c,amount,false,true,true
+        ));
+    }
+
+    static boolean hikari (AbstractCard c ,int num) {
+        return AbstractDungeon.actionManager.cardsPlayedThisTurn.size() >= num;
     }
 }
 
