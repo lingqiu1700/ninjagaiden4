@@ -7,8 +7,10 @@ import com.megacrit.cardcrawl.powers.FlightPower;
 import ninjagaiden4.helpers.AbstractNinjaAttackCard;
 import ninjagaiden4.helpers.AttackHelper;
 import ninjagaiden4.helpers.ModHelper;
+import ninjagaiden4.helpers.WeaponCard;
+import ninjagaiden4.modcore.WeaponTags;
 
-public class Eagle_Dive extends AbstractNinjaAttackCard {
+public class Eagle_Dive extends AbstractNinjaAttackCard implements WeaponCard {
     public static final String ID = ModHelper.makeID("Eagle_Dive");
 
     public Eagle_Dive() {
@@ -24,6 +26,9 @@ public class Eagle_Dive extends AbstractNinjaAttackCard {
                 5,
                 0
         );
+        this.tags.add(WeaponTags.WEAPON_YATOUSEN);
+        this.tags.add(WeaponTags.BLOOD_SPACE);
+        this.tags.add(WeaponTags.Y);
     }
 
     @Override

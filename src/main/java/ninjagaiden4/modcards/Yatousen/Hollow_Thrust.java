@@ -10,12 +10,14 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import ninjagaiden4.actions.core;
 import ninjagaiden4.helpers.ModHelper;
+import ninjagaiden4.helpers.WeaponCard;
+import ninjagaiden4.modcore.WeaponTags;
 
 import static ninjagaiden4.characters.yakumo.PlayerColorEnum.YAKUMO_CARD_COLOR;
 import static ninjagaiden4.modcore.Ninja4.CardFields.dismemberRate;
 
 
-public class Hollow_Thrust extends CustomCard implements ModHelper {
+public class Hollow_Thrust extends CustomCard implements WeaponCard {
     public static final String ID = "ninjagaiden4:Hollow_Thrust";
     private static final CardStrings CARD_STRINGS = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = CARD_STRINGS.NAME;
@@ -33,6 +35,9 @@ public class Hollow_Thrust extends CustomCard implements ModHelper {
         this.magicNumber = this.baseMagicNumber = 2;
         this.tags.add(ninjagaiden4.modcore.Ninja4.CURSED_BLADES);
         dismemberRate.set(this,0.2F);
+        this.tags.add(WeaponTags.WEAPON_YATOUSEN);
+        this.tags.add(WeaponTags.W_S);
+        this.tags.add(WeaponTags.X);
     }
 
     @Override

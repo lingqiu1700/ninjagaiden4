@@ -24,10 +24,10 @@ public class core extends AbstractGameAction {
     @Override
     public void update() {
         this.target.damage(this.info);
-        if(!this.target.isDeadOrEscaped()) {
+        if (!this.target.isDeadOrEscaped()) {
             float rate = Ninja4.CardFields.dismemberRate.get(this.card);
 
-            if(Math.random() < rate) {
+            if (Math.random() < rate) {
                 AbstractDungeon.actionManager.addToTop(
                         new ApplyPowerAction(
                                 this.target,

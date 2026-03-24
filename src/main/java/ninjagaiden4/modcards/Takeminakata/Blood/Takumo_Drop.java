@@ -10,12 +10,14 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.DexterityPower;
 import ninjagaiden4.actions.core;
 import ninjagaiden4.helpers.ModHelper;
+import ninjagaiden4.helpers.WeaponCard;
+import ninjagaiden4.modcore.WeaponTags;
 
 import static ninjagaiden4.characters.yakumo.PlayerColorEnum.YAKUMO_CARD_COLOR;
 import static ninjagaiden4.modcore.Ninja4.CardFields.dismemberRate;
 
 
-public class Takumo_Drop extends CustomCard implements ModHelper {
+public class Takumo_Drop extends CustomCard implements WeaponCard {
     public static final String ID = "ninjagaiden4:Takumo_Drop";
     private static final CardStrings CARD_STRINGS = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = CARD_STRINGS.NAME;
@@ -33,6 +35,9 @@ public class Takumo_Drop extends CustomCard implements ModHelper {
         this.magicNumber = this.baseMagicNumber = 3;
         this.tags.add(ninjagaiden4.modcore.Ninja4.CURSED_BLADES);
         dismemberRate.set(this,0.2F);
+        this.tags.add(WeaponTags.WEAPON_TAKEMINAKATA);
+        this.tags.add(WeaponTags.BLOOD_W_S);
+        this.tags.add(WeaponTags.Y);
     }
 
     @Override

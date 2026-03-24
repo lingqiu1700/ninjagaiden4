@@ -7,8 +7,10 @@ import com.megacrit.cardcrawl.powers.DexterityPower;
 import ninjagaiden4.helpers.AbstractNinjaAttackCard;
 import ninjagaiden4.helpers.AttackHelper;
 import ninjagaiden4.helpers.ModHelper;
+import ninjagaiden4.helpers.WeaponCard;
+import ninjagaiden4.modcore.WeaponTags;
 
-public class Propulsion_Sweep extends AbstractNinjaAttackCard {
+public class Propulsion_Sweep extends AbstractNinjaAttackCard implements WeaponCard {
     public static final String ID = ModHelper.makeID("Propulsion_Sweep");
 
     public Propulsion_Sweep() {
@@ -24,6 +26,9 @@ public class Propulsion_Sweep extends AbstractNinjaAttackCard {
                 2,
                 0
         );
+        this.tags.add(WeaponTags.WEAPON_YATOUSEN);
+        this.tags.add(WeaponTags.BLOOD_C);
+        this.tags.add(WeaponTags.Y);
     }
 
     @Override

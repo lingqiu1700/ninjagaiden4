@@ -5,11 +5,11 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import ninjagaiden4.modcards.Takeminakata.Spiral_Shadow;
-import ninjagaiden4.modcards.Takeminakata.Blood.Takumo_Drop;
-import ninjagaiden4.modcards.Yatousen.Blood.Eagle_Claw;
-import ninjagaiden4.modcards.Yatousen.Hollow_Thrust;
-import ninjagaiden4.relics.*;
+// 导入我们的接口和智能字典
+import ninjagaiden4.helpers.WeaponCard;
+import ninjagaiden4.helpers.WeaponRelics;
+import ninjagaiden4.relics.Takeminakata;
+import ninjagaiden4.relics.Yatousen;
 
 public class SwapWeaponAction extends AbstractGameAction {
     private String targetWeaponRelicId; // 你想要切换到的新武器ID
@@ -24,25 +24,33 @@ public class SwapWeaponAction extends AbstractGameAction {
     public void update() {
         if (this.duration == Settings.ACTION_DUR_FAST) {
 
-            // 1. 移除旧武器，获得新武器
-            // 假设当前拿着 Takeminakata，要切成 Yatousen
-            if (AbstractDungeon.player.hasRelic(Yatousen.ID) && targetWeaponRelicId.equals("ninjagaiden4:Yatousen")) {
-                AbstractDungeon.player.loseRelic(Yatousen.ID); // 卸下旧武器
-                // 获得新武器 (这里假设你有一个名为 Yatousen 的遗物类)
-                AbstractDungeon.getCurrRoom().spawnRelicAndObtain(Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F, new Yatousen());
-            }
-            // 反过来：当前拿着 Yatousen，要切成 Takeminakata
-            else if (AbstractDungeon.player.hasRelic("ninjagaiden4:Yatousen") && targetWeaponRelicId.equals(Yatousen.ID)) {
+            // ==========================================
+            // 1. 遗物替换逻辑 (修复了逻辑错误，变得更通用)
+            // ==========================================
+
+            // 第一步：不管你现在拿着什么武器，通通卸下
+            if (AbstractDungeon.player.hasRelic(Takeminakata.ID)) {
+                AbstractDungeon.player.loseRelic(Takeminakata.ID);
+            } else if (AbstractDungeon.player.hasRelic("ninjagaiden4:Yatousen")) { // 假设你没在Yatousen里写ID常量，就用字符串
                 AbstractDungeon.player.loseRelic("ninjagaiden4:Yatousen");
+            }
+            // 如果以后有新武器，在这里继续 else if 卸下即可
+
+            // 第二步：根据传入的目标 ID，发给你对应的新武器
+            if (targetWeaponRelicId.equals("ninjagaiden4:Yatousen")) {
                 AbstractDungeon.getCurrRoom().spawnRelicAndObtain(Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F, new Yatousen());
+            } else if (targetWeaponRelicId.equals(Takeminakata.ID)) {
+                AbstractDungeon.getCurrRoom().spawnRelicAndObtain(Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F, new Takeminakata());
             }
 
-            // 2. 替换所有位置的卡牌 (并且继承升级状态)
-            replaceCardsInGroup(AbstractDungeon.player.masterDeck); // 替换总牌组（确保战斗结束后也是新卡）
-            replaceCardsInGroup(AbstractDungeon.player.hand);       // 替换手牌
-            replaceCardsInGroup(AbstractDungeon.player.drawPile);   // 替换抽牌堆
-            replaceCardsInGroup(AbstractDungeon.player.discardPile);// 替换弃牌堆
-            replaceCardsInGroup(AbstractDungeon.player.exhaustPile);// 替换消耗堆
+            // ==========================================
+            // 2. 卡牌替换逻辑 (接入全自动图鉴搜索)
+            // ==========================================
+            replaceCardsInGroup(AbstractDungeon.player.masterDeck);
+            replaceCardsInGroup(AbstractDungeon.player.hand);
+            replaceCardsInGroup(AbstractDungeon.player.drawPile);
+            replaceCardsInGroup(AbstractDungeon.player.discardPile);
+            replaceCardsInGroup(AbstractDungeon.player.exhaustPile);
 
             // 刷新手牌排版，防止手牌显示错位
             AbstractDungeon.player.hand.refreshHandLayout();
@@ -55,35 +63,26 @@ public class SwapWeaponAction extends AbstractGameAction {
     private void replaceCardsInGroup(CardGroup group) {
         for (int i = 0; i < group.group.size(); i++) {
             AbstractCard oldCard = group.group.get(i);
-            // 获取对应的替换卡牌
-            AbstractCard newCard = getCorrespondingCard(oldCard, targetWeaponRelicId);
 
-            if (newCard != null) {
-                // 如果旧卡牌升过级，新卡牌自动升级！
-                if (oldCard.upgraded) {
-                    newCard.upgrade();
+            // 【魔法时刻】：只有签了 WeaponCard 接口的牌，才允许被替换
+            if (oldCard instanceof WeaponCard) {
+
+                // 把新武器的 ID 和要被替换的旧牌，直接扔给我们的智能字典去处理！
+                AbstractCard newCard = WeaponRelics.getReplacementCard(targetWeaponRelicId, oldCard);
+
+                // 如果图鉴里找到了对应的平替牌
+                if (newCard != null) {
+                    // 继承打铁（升级）状态
+                    if (oldCard.upgraded) {
+                        newCard.upgrade();
+                    }
+                    // 执行替换
+                    group.group.set(i, newCard);
                 }
-                // 执行替换
-                group.group.set(i, newCard);
             }
         }
     }
 
-    // 核心映射库：定义哪张卡对应哪张卡
-    private AbstractCard getCorrespondingCard(AbstractCard oldCard, String newWeaponId) {
-        // 如果切成 Yatousen（夜叉王）
-        if (newWeaponId.equals("ninjagaiden4:Yatousen")) {
-            // Takeminakata的卡 -> 变成 Yatousen的卡
-            if (oldCard.cardID.equals(Spiral_Shadow.ID)) return new Eagle_Claw(); // 替换为你实际的卡
-            if (oldCard.cardID.equals(Takumo_Drop.ID)) return new Hollow_Thrust();  // 替换为你实际的卡
-        }
-        // 如果切成 Takeminakata（建御名方）
-        else if (newWeaponId.equals(Yatousen.ID)) {
-            // Yatousen的卡 -> 变成 Takeminakata的卡
-            if (oldCard.cardID.equals("ninjagaiden4:Yatousen_Attack_1")) return new Spiral_Shadow();
-            if (oldCard.cardID.equals("ninjagaiden4:Yatousen_Attack_2")) return new Takumo_Drop();
-        }
-
-        return null; // 如果不是武器专属卡（比如基础打击、防御），就不替换
-    }
+    // 注意：原本写在最下面的那个几十行的 getCorrespondingCard 方法被彻底删除了！
+    // 因为我们已经把它外包给 WeaponRelics 去做了。
 }

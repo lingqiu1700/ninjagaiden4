@@ -1,6 +1,7 @@
 package ninjagaiden4.modcards.Magatsuhi.Blood.Derivative;
 
-import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
+import com.evacipated.cardcrawl.mod.stslib.actions.common.StunMonsterAction;
+import com.evacipated.cardcrawl.mod.stslib.powers.StunMonsterPower;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -9,16 +10,14 @@ import ninjagaiden4.helpers.AbstractNinjaAttackCard;
 import ninjagaiden4.helpers.AttackHelper;
 import ninjagaiden4.helpers.ModHelper;
 
-import static ninjagaiden4.modcore.Ninja4.CardFields.dismemberRate;
-
-public class Earth_Shatter_Derivative extends AbstractNinjaAttackCard {
-    public static final String ID = ModHelper.makeID("Earth_Shatter_Derivative");
+public class Uppercrush_Strikes_Derivative extends AbstractNinjaAttackCard {
+    public static final String ID = ModHelper.makeID("Uppercrush_Strikes_Derivative");
     private int targetCombo = 0;
 
-    public Earth_Shatter_Derivative() {
+    public Uppercrush_Strikes_Derivative() {
         super(
                 ID,
-                "Earth_Shatter_Derivative",
+                "Uppercrush_Strikes_Derivative",
                 2,
                 CardRarity.SPECIAL,
                 CardTarget.ENEMY,
@@ -43,38 +42,28 @@ public class Earth_Shatter_Derivative extends AbstractNinjaAttackCard {
 
         // 动态更新牌面文字，让玩家一眼就能看到需要把这张牌作为第几张打出
         if (this.targetCombo > 0) {
-            this.rawDescription = "造成 !D! 点伤害。 NL 完美连击：如果这是你本回合打出的第 [ #y" + this.targetCombo + " ] 张牌，则造成 额外 伤害。";
+            this.rawDescription = "造成 !D! 点伤害。 NL 完美连击：如果这是你本回合打出的第 [ #y" + this.targetCombo + " ] 张牌，则造成 3 倍伤害。";
             this.initializeDescription();
         }
     }
 
     @Override
-    public void use(AbstractPlayer p, AbstractMonster m) {
-        if (AbstractDungeon.actionManager.cardsPlayedThisTurn.size() == this.targetCombo) {
-
-            this.damage = this.damage + 2;
-            int MagicNumber = this.magicNumber + 3;
-            dismemberRate.set(this,0.25F);
-
-            ModHelper.Loop(0,MagicNumber, i -> AttackHelper.RandcoreAction(p,m,this));
-        }else {
-            AttackHelper.coreAction(p,m,this);
+    public void triggerWhenDrawn() {
+        this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy();
+        if (ModHelper.hikari(this,this.targetCombo)) {
+            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy();
         }
-        this.addToBot(new GainEnergyAction(1));
-
-        this.targetCombo = 0;
     }
 
     @Override
-    public void triggerOnGlowCheck() {
-        this.glowColor = AbstractCard.BLUE_BORDER_GLOW_COLOR.cpy(); // 默认发蓝光
+    public void use(AbstractPlayer p, AbstractMonster m) {
+        AttackHelper.EXAttackAction(p,m,this,this.targetCombo,10,0,0.3F);
 
-        /* * 发光检测是在卡牌还在手牌里时触发的，此时这张牌【还没有】被打出。
-         * 所以这里只需要判断前面的牌是否已经够 2 张了。
-         */
-        if (AbstractDungeon.actionManager.cardsPlayedThisTurn.size() == (this.targetCombo - 1)) {
-            this.glowColor = AbstractCard.GOLD_BORDER_GLOW_COLOR.cpy(); // 满足条件发金光
+        if(AbstractDungeon.actionManager.cardsPlayedThisTurn.size() >= this.targetCombo+1) {
+            addToBot(new StunMonsterAction(m,p));
         }
+
+        this.targetCombo = 0;
     }
 
     @Override

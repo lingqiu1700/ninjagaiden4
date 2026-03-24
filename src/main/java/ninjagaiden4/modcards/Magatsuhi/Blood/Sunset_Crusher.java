@@ -1,43 +1,43 @@
-package ninjagaiden4.modcards.Yatousen.Blood;
+package ninjagaiden4.modcards.Magatsuhi.Blood;
 
 import com.evacipated.cardcrawl.mod.stslib.actions.common.StunMonsterAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.DexterityPower;
-import com.megacrit.cardcrawl.powers.FlightPower;
+import ninjagaiden4.actions.core;
 import ninjagaiden4.helpers.AbstractNinjaAttackCard;
 import ninjagaiden4.helpers.AttackHelper;
 import ninjagaiden4.helpers.ModHelper;
 import ninjagaiden4.helpers.WeaponCard;
 import ninjagaiden4.modcore.WeaponTags;
 
-public class Devilish_Mole extends AbstractNinjaAttackCard implements WeaponCard {
-    public static final String ID = ModHelper.makeID("Devilish_Mole");
+public class Sunset_Crusher extends AbstractNinjaAttackCard implements WeaponCard {
+    public static final String ID = ModHelper.makeID("Sunset_Crusher");
 
-    public Devilish_Mole() {
+    public Sunset_Crusher() {
         super(
                 ID,
-                "Devilish_Mole",
+                "Sunset_Crusher",
                 2,
                 CardRarity.UNCOMMON,
                 CardTarget.ENEMY,
-                2,
-                10,
-                0.06F,
+                15,
                 1,
-                2
+                0.5F,
+                15,
+                0
         );
-        this.tags.add(WeaponTags.WEAPON_YATOUSEN);
-        this.tags.add(WeaponTags.BLOOD_W_S);
+        this.tags.add(WeaponTags.WEAPON_MAGATSUHI);
         this.tags.add(WeaponTags.Y);
+        this.tags.add(WeaponTags.BLOOD_SPACE);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        ModHelper.Loop(0, this.magicNumber, i -> AttackHelper.coreAction(p, m, this));
-        if (Math.random() < 0.6) {
+        ModHelper.Loop(0, this.magicNumber, i -> {
+            AttackHelper.AoeAction(p, this, (monster, info) -> new core(monster, info, this));
+        });
+        if (Math.random() < 0.7) {
             addToBot(new StunMonsterAction(m, p));
         }
-        ModHelper.PAP(new FlightPower(p,1));
     }
 }

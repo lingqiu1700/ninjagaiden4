@@ -8,8 +8,10 @@ import ninjagaiden4.actions.core;
 import ninjagaiden4.helpers.AbstractNinjaAttackCard;
 import ninjagaiden4.helpers.AttackHelper;
 import ninjagaiden4.helpers.ModHelper;
+import ninjagaiden4.helpers.WeaponCard;
+import ninjagaiden4.modcore.WeaponTags;
 
-public class Skewer_Feast extends AbstractNinjaAttackCard {
+public class Skewer_Feast extends AbstractNinjaAttackCard implements WeaponCard {
     public static final String ID = ModHelper.makeID("Skewer_Feast");
 
     public Skewer_Feast() {
@@ -25,6 +27,9 @@ public class Skewer_Feast extends AbstractNinjaAttackCard {
                 4,
                 0
         );
+        this.tags.add(WeaponTags.WEAPON_YATOUSEN);
+        this.tags.add(WeaponTags.F);
+        this.tags.add(WeaponTags.Y);
     }
 
     @Override

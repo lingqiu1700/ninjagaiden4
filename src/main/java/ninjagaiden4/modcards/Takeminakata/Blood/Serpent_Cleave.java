@@ -11,13 +11,15 @@ import com.megacrit.cardcrawl.powers.StrengthPower;
 import ninjagaiden4.actions.core;
 import ninjagaiden4.helpers.AttackHelper;
 import ninjagaiden4.helpers.ModHelper;
+import ninjagaiden4.helpers.WeaponCard;
 import ninjagaiden4.modcore.Ninja4;
+import ninjagaiden4.modcore.WeaponTags;
 
 
 import static ninjagaiden4.characters.yakumo.PlayerColorEnum.YAKUMO_CARD_COLOR;
 
 
-public class Serpent_Cleave extends CustomCard implements ModHelper {
+public class Serpent_Cleave extends CustomCard implements WeaponCard {
     public static final String ID = "ninjagaiden4:Serpent_Cleave";
     private static final CardStrings CARD_STRINGS = CardCrawlGame.languagePack.getCardStrings(ID);
     private static final String NAME = CARD_STRINGS.NAME;
@@ -36,6 +38,9 @@ public class Serpent_Cleave extends CustomCard implements ModHelper {
         this.magicNumber = this.baseMagicNumber;
         this.tags.add(ninjagaiden4.modcore.Ninja4.CURSED_BLADES);
         Ninja4.CardFields.dismemberRate.set(this,0.25F);
+        this.tags.add(WeaponTags.WEAPON_TAKEMINAKATA);
+        this.tags.add(WeaponTags.BLOOD_F);
+        this.tags.add(WeaponTags.Y);
     }
 
     @Override

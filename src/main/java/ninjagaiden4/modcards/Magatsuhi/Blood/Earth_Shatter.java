@@ -6,9 +6,11 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import ninjagaiden4.helpers.AbstractNinjaAttackCard;
 import ninjagaiden4.helpers.AttackHelper;
 import ninjagaiden4.helpers.ModHelper;
+import ninjagaiden4.helpers.WeaponCard;
 import ninjagaiden4.modcards.Magatsuhi.Blood.Derivative.Earth_Shatter_Derivative;
+import ninjagaiden4.modcore.WeaponTags;
 
-public class Earth_Shatter extends AbstractNinjaAttackCard {
+public class Earth_Shatter extends AbstractNinjaAttackCard implements WeaponCard {
     public static final String ID = ModHelper.makeID("Earth_Shatter");
 
     public Earth_Shatter() {
@@ -16,7 +18,7 @@ public class Earth_Shatter extends AbstractNinjaAttackCard {
                 ID,
                 "Earth_Shatter",
                 1,
-                CardRarity.COMMON,
+                CardRarity.UNCOMMON,
                 CardTarget.ENEMY,
                 6,
                 1,
@@ -25,6 +27,9 @@ public class Earth_Shatter extends AbstractNinjaAttackCard {
                 0
         );
         this.cardsToPreview = new Earth_Shatter_Derivative();
+        this.tags.add(WeaponTags.WEAPON_MAGATSUHI);
+        this.tags.add(WeaponTags.BLOOD_W_S);
+        this.tags.add(WeaponTags.X);
     }
 
     @Override

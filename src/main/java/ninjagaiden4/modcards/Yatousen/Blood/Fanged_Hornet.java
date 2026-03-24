@@ -3,12 +3,13 @@ package ninjagaiden4.modcards.Yatousen.Blood;
 import com.evacipated.cardcrawl.mod.stslib.actions.common.StunMonsterAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import ninjagaiden4.helpers.AbstractNinjaAttackCard;
 import ninjagaiden4.helpers.AttackHelper;
 import ninjagaiden4.helpers.ModHelper;
+import ninjagaiden4.helpers.WeaponCard;
+import ninjagaiden4.modcore.WeaponTags;
 
-public class Fanged_Hornet extends AbstractNinjaAttackCard {
+public class Fanged_Hornet extends AbstractNinjaAttackCard implements WeaponCard {
     public static final String ID = ModHelper.makeID("Fanged_Hornet");
 
     public Fanged_Hornet() {
@@ -24,6 +25,9 @@ public class Fanged_Hornet extends AbstractNinjaAttackCard {
                 -13,
                 6
         );
+        this.tags.add(WeaponTags.WEAPON_YATOUSEN);
+        this.tags.add(WeaponTags.BLOOD_F);
+        this.tags.add(WeaponTags.X);
     }
 
     @Override

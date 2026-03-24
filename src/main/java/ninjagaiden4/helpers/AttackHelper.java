@@ -1,6 +1,7 @@
 package ninjagaiden4.helpers;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardAtBottomOfDeckAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -54,12 +55,48 @@ public class AttackHelper {
         if (AbstractDungeon.actionManager.cardsPlayedThisTurn.size() >= num+1) {
 
             card.damage = card.damage + Damage;
-            card.magicNumber = card.magicNumber + magicnumber;
+            int MagicNumber = card.magicNumber + magicnumber;
             Ninja4.CardFields.dismemberRate.set(card,dismemberRate);
 
-            ModHelper.Loop(0,card.magicNumber, i -> AttackHelper.RandcoreAction(p,m,card));
+            ModHelper.Loop(0,MagicNumber, i -> AttackHelper.RandcoreAction(p,m,card));
+
+            AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(1));
         }else {
             AttackHelper.coreAction(p,m,card);
+        }
+    }
+
+    // 专门为群体攻击设计的 EX 连击方法
+    public static void EXAoeAttackAction(AbstractPlayer p, AbstractCard card, int num, int bonusDamage, int extraHits, float exDismemberRate) {
+
+        // 判断是否满足 EX 条件 (比如这是本回合第 num+1 张牌)
+        boolean isEX = AbstractDungeon.actionManager.cardsPlayedThisTurn.size() >= num + 1;
+
+        if (isEX) {
+            // 满足条件：修改断肢率
+            Ninja4.CardFields.dismemberRate.set(card, exDismemberRate);
+            AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(1));
+        }
+
+        // 计算总共要砍几刀 (基础1刀 + EX额外送的刀数)
+        int totalHits = 1 + (isEX ? extraHits : 0);
+
+        for (int hit = 0; hit < totalHits; hit++) {
+            if (card.multiDamage != null) {
+                int i = 0;
+                for (AbstractMonster monster : AbstractDungeon.getMonsters().monsters) {
+                    if (!monster.isDeadOrEscaped()) {
+
+                        // 【关键点】：如果是EX状态，手动把额外伤害加到最终伤害里
+                        int finalDamage = card.multiDamage[i] + (isEX ? bonusDamage : 0);
+                        DamageInfo info = new DamageInfo(p, finalDamage, DamageInfo.DamageType.NORMAL);
+
+                        // 对每个存活的怪物执行 core 动作
+                        AbstractDungeon.actionManager.addToBottom(new core(monster, info, card));
+                    }
+                    i++;
+                }
+            }
         }
     }
 }

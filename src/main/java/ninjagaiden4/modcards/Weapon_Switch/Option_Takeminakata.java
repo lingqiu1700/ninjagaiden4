@@ -5,6 +5,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import ninjagaiden4.actions.SwapWeaponAction;
+import ninjagaiden4.relics.Takeminakata;
 import ninjagaiden4.relics.Yatousen;
 
 public class Option_Takeminakata extends CustomCard {
@@ -30,6 +31,6 @@ public class Option_Takeminakata extends CustomCard {
     @Override
     public void onChoseThisOption() {
         // 调用我们之前写好的换武器 Action
-        AbstractDungeon.actionManager.addToBottom(new SwapWeaponAction(Yatousen.ID));
+        AbstractDungeon.actionManager.addToBottom(new SwapWeaponAction(Takeminakata.ID));
     }
 }
