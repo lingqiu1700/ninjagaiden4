@@ -1,14 +1,12 @@
 package ninjagaiden4.modcards.Takeminakata;
 
 import basemod.abstracts.CustomCard;
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import ninjagaiden4.actions.core;
-import ninjagaiden4.helpers.ModHelper;
 import ninjagaiden4.helpers.WeaponCard;
 import ninjagaiden4.modcore.WeaponTags;
 
